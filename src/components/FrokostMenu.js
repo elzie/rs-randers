@@ -80,8 +80,8 @@ class FrokostMenu extends React.Component {
     this.getBornemenu();
     this.getDesserter();
   }
-  getAlacarte = () => {
-    frokostRef
+  getAlacarte = async () => {
+    await frokostRef
       .collection('alacarte')
       .get()
       .then((snapshot) => {
@@ -103,8 +103,8 @@ class FrokostMenu extends React.Component {
         console.log('Error getting documents', err);
       });
   };
-  getSmorrebrod = () => {
-    frokostRef
+  getSmorrebrod = async () => {
+    await frokostRef
       .collection('smørrebrød')
       .get()
       .then((snapshot) => {
@@ -126,8 +126,8 @@ class FrokostMenu extends React.Component {
         console.log('Error getting documents', err);
       });
   };
-  getBornemenu = () => {
-    frokostRef
+  getBornemenu = async () => {
+    await frokostRef
       .collection('børnemenu')
       .get()
       .then((snapshot) => {
@@ -149,8 +149,8 @@ class FrokostMenu extends React.Component {
         console.log('Error getting documents', err);
       });
   };
-  getDesserter = () => {
-    frokostRef
+  getDesserter = async () => {
+    await frokostRef
       .collection('desserter')
       .get()
       .then((snapshot) => {
