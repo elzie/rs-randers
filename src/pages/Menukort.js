@@ -6,16 +6,17 @@ import MenuComponent from '../components/MenuComponent';
 import MenuBackground from '../img/menucard.jpg';
 
 const Wrapper = styled.div`
-  height: calc(100vh - 40px);
+  min-height: calc(120vh - 40px);
   background-image: url(${MenuBackground});
   background-size: cover;
   background-position: center;
 `;
 const Content = styled.div`
   background: rgba(256, 256, 256, 0.5);
-  height: calc(100vh - 40px);
+  min-height: calc(120vh - 40px);
   padding: 10px 0 0 0;
   & h1 {
+    margin: 15px 0 15px 0;
     color: #ffffff;
     font-size: 3em;
     font-weight: 700;
@@ -30,10 +31,9 @@ const Content = styled.div`
     max-width: 900px;
     margin: auto;
   }
-  @media (max-width: 1024px) {
-    padding: 10px 0 0 0;
+  @media (max-width: 360px) {
     & h1 {
-      margin: 15px;
+      font-size: 24px;
     }
   }
 `;

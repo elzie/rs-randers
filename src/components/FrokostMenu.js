@@ -5,26 +5,63 @@ import styled from 'styled-components';
 const Content = styled.div`
   padding: 10px;
 `;
-
 const SubMenuHeader = styled.h2`
   font-family: 'Caveat', cursive;
   color: darkslategrey;
   text-align: center;
   font-size: 32px;
-  margin: 10px;
+  margin: 0;
 `;
 const SubMenuContainer = styled.div`
   background: rgba(255, 245, 238, 0.5);
-  height: 66vh;
+  //   height: 66vh;
   margin: 0 10px 0 10px;
 `;
 const SubMenu = styled.div``;
-const SubMenuNavigation = styled.div`
-  & div {
+const SubMenuNavigation = styled.div``;
+const SubMenuBtn = styled.button`
+margin: 0;
+    width: 25%;
     display: inline-block;
-    padding: 10px;
     cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgrey;
   }
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background: rgba(0,191,255,0.2);
+  }
+`;
+const RetContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Ret = styled.div`
+  border-radius: 3px;
+  width: 340px !important;
+  //   float: left;
+  display: block;
+  //   min-height: 100px;
+  margin: 5px !important;
+  & h3 {
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    color: darkslategrey;
+    margin: 0;
+    padding: 0;
+  }
+  & div {
+    font-size: 14px;
+    text-align: center;
+    margin: auto;
+  }
+`;
+const Indhold = styled.div``;
+const Pris = styled.div`
+  font-weight: bold;
 `;
 class FrokostMenu extends React.Component {
   state = {
@@ -38,12 +75,18 @@ class FrokostMenu extends React.Component {
     desserter: [],
   };
   componentDidMount() {
-    const alacarte = frokostRef
+    this.getAlacarte();
+    this.getSmorrebrod();
+    this.getBornemenu();
+    this.getDesserter();
+  }
+  getAlacarte = () => {
+    frokostRef
       .collection('alacarte')
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          console.log(doc.id, '=>', doc.data());
+          //   console.log(doc.id, '=>', doc.data());
           const newFood = {
             id: doc.id,
             titel: doc.data().titel,
@@ -59,7 +102,76 @@ class FrokostMenu extends React.Component {
       .catch((err) => {
         console.log('Error getting documents', err);
       });
-  }
+  };
+  getSmorrebrod = () => {
+    frokostRef
+      .collection('smørrebrød')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          //   console.log(doc.id, '=>', doc.data());
+          const newFood = {
+            id: doc.id,
+            titel: doc.data().titel,
+            indhold: doc.data().indhold,
+            pris: doc.data().pris,
+          };
+
+          this.setState({
+            smørrebrød: [newFood, ...this.state.smørrebrød],
+          });
+        });
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err);
+      });
+  };
+  getBornemenu = () => {
+    frokostRef
+      .collection('børnemenu')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          //   console.log(doc.id, '=>', doc.data());
+          const newFood = {
+            id: doc.id,
+            titel: doc.data().titel,
+            indhold: doc.data().indhold,
+            pris: doc.data().pris,
+          };
+
+          this.setState({
+            børnemenu: [newFood, ...this.state.børnemenu],
+          });
+        });
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err);
+      });
+  };
+  getDesserter = () => {
+    frokostRef
+      .collection('desserter')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          //   console.log(doc.id, '=>', doc.data());
+          const newFood = {
+            id: doc.id,
+            titel: doc.data().titel,
+            indhold: doc.data().indhold,
+            pris: doc.data().pris,
+          };
+
+          this.setState({
+            desserter: [newFood, ...this.state.desserter],
+          });
+        });
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err);
+      });
+  };
 
   alacarteRef = React.createRef();
   smørrebrødRef = React.createRef();
@@ -70,6 +182,7 @@ class FrokostMenu extends React.Component {
     // console.log(ref.currentTarget.id);
     if (ref.currentTarget.id === 'alacarte') {
       //   console.log(ref.currentTarget.id);
+      //   this.getAlacarte();
       this.setState({
         showAlacarte: true,
         showSmørrebrød: false,
@@ -112,54 +225,87 @@ class FrokostMenu extends React.Component {
           <SubMenuHeader>Frokost Menu</SubMenuHeader>
           <SubMenuContainer>
             <SubMenuNavigation>
-              <div onClick={this.showChosenMenu} id="alacarte">
-                alacarte
-              </div>
-              <div onClick={this.showChosenMenu} id="smørrebrød">
+              <SubMenuBtn onClick={this.showChosenMenu} id="alacarte">
+                Á la carte
+              </SubMenuBtn>
+              <SubMenuBtn onClick={this.showChosenMenu} id="smørrebrød">
                 Smørrebrød
-              </div>
-              <div onClick={this.showChosenMenu} id="børnemenu">
+              </SubMenuBtn>
+              <SubMenuBtn onClick={this.showChosenMenu} id="børnemenu">
                 Børnemenu
-              </div>
-              <div onClick={this.showChosenMenu} id="desserter">
+              </SubMenuBtn>
+              <SubMenuBtn onClick={this.showChosenMenu} id="desserter">
                 Desserter
-              </div>
+              </SubMenuBtn>
             </SubMenuNavigation>
             {/* spacer */}
             {this.state.showAlacarte ? (
-              <div>
+              <RetContainer>
                 <SubMenu ref={this.alacarteRef}>
-                  AlaCarte
-                  {this.state.alacarte.id}
                   {this.state.alacarte.map((mad) => {
                     return (
-                      <div key={mad.id}>
-                        <div>{mad.titel}</div>
-                        <div>{mad.indhold}</div>
-                        <div>{mad.pris}</div>
-                        <br />
-                      </div>
+                      <Ret key={mad.id}>
+                        <h3>{mad.titel}</h3>
+                        <Indhold>{mad.indhold}</Indhold>
+                        <Pris>Pris: {mad.pris},-</Pris>
+                      </Ret>
                     );
                   })}
                 </SubMenu>
-              </div>
+              </RetContainer>
             ) : null}
             {/* spacer */}
             {this.state.showSmørrebrød ? (
               <div>
-                <SubMenu ref={this.smørrebrødRef}>Smørrebrød</SubMenu>
+                <RetContainer>
+                  <SubMenu ref={this.smørrebrødRef}>
+                    {this.state.smørrebrød.map((mad) => {
+                      return (
+                        <Ret key={mad.id}>
+                          <h3>{mad.titel}</h3>
+                          <Indhold>{mad.indhold}</Indhold>
+                          <Pris>Pris: {mad.pris},-</Pris>
+                        </Ret>
+                      );
+                    })}
+                  </SubMenu>
+                </RetContainer>
               </div>
             ) : null}
             {/* spacer */}
             {this.state.showBørnemenu ? (
               <div>
-                <SubMenu ref={this.børnemenuRef}>Børnemenu</SubMenu>
+                <RetContainer>
+                  <SubMenu ref={this.børnemenuRef}>
+                    {this.state.børnemenu.map((mad) => {
+                      return (
+                        <Ret key={mad.id}>
+                          <h3>{mad.titel}</h3>
+                          <Indhold>{mad.indhold}</Indhold>
+                          <Pris>Pris: {mad.pris},-</Pris>
+                        </Ret>
+                      );
+                    })}
+                  </SubMenu>
+                </RetContainer>
               </div>
             ) : null}
             {/* spacer */}
             {this.state.showDesserter ? (
               <div>
-                <SubMenu ref={this.desserterRef}>Desserter</SubMenu>
+                <RetContainer>
+                  <SubMenu ref={this.desserterRef}>
+                    {this.state.desserter.map((mad) => {
+                      return (
+                        <Ret key={mad.id}>
+                          <h3>{mad.titel}</h3>
+                          <Indhold>{mad.indhold}</Indhold>
+                          <Pris>Pris: {mad.pris},-</Pris>
+                        </Ret>
+                      );
+                    })}
+                  </SubMenu>
+                </RetContainer>
               </div>
             ) : null}
           </SubMenuContainer>

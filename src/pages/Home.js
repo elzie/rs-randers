@@ -49,7 +49,7 @@ const WelcomeText = styled.div`
 `;
 const WelcomeImage = styled.div`
   max-width: 300px;
-  max-height: 500px;
+  max-height: 400px;
   margin: 20px 0 0 20px;
   border: 2px solid deepskyblue;
   width: 100%;
@@ -73,7 +73,7 @@ const Button = styled.button`
   display: inline-block;
   color: darkslategrey;
   font-size: 1em;
-  margin: 1em;
+  margin: 5px;
   padding: 0.25em 1em;
   border: 2px solid skyblue;
   border-radius: 3px;
@@ -82,11 +82,6 @@ const Button = styled.button`
   &:hover {
     color: white;
     background: lightblue;
-  }
-  @media (max-width: 1024px) {
-    & h2 {
-      margin: 5px;
-    }
   }
 `;
 

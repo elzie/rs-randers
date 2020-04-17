@@ -21,7 +21,7 @@ import DessertMenu from './DessertMenu';
 
 const Background = styled.div`
   background: rgba(256, 256, 256, 0.5);
-  height: 80vh;
+  //   height: 80vh;
 `;
 const Button = styled.button`
   background: rgba(0, 191, 255, 0.3);
@@ -41,8 +41,8 @@ const Button = styled.button`
 const Menus = styled.div``;
 class MenuComponent extends React.Component {
   state = {
-    showFrokost: true,
-    showAften: false,
+    showFrokost: false,
+    showAften: true,
     showDrinks: false,
     showDessert: false,
   };
@@ -115,10 +115,10 @@ class MenuComponent extends React.Component {
               id="drinks"
               onClick={this.showChosenMenu}
             >
-              Drinks
+              Kaffe & Drinks
             </Button>
             <Button id="dessert" onClick={this.showChosenMenu}>
-              Dessert, Kaffe & Avec
+              Dessert menu
             </Button>
           </div>
           <Menus>
