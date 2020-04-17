@@ -1,8 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
+//Image imports
 import FacebookLogo from '../img/social/facebook.png';
 
+const Wrapper = styled.div``;
+const Nav = styled.div`
+  background: deepskyblue;
+  // width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  & div {
+    width: 100%;
+    max-width: 900px;
+    height: 40px;
+  }
+  @media (max-width: 360px) {
+    display: block;
+  }
+`;
 const MenuContainer = styled.div`
   display: flex;
   align-items: center;
@@ -67,7 +87,7 @@ const FbLogo = styled.div`
     margin: 5px 5px 0 0;
   }
 `;
-const MenuBtn = styled.div`
+const MobileMenuBtn = styled.div`
   margin: 10px 0 0 10px;
   & div.btn-line {
     width: 28px;
@@ -76,40 +96,79 @@ const MenuBtn = styled.div`
     background: white;
   }
 `;
-
+const MenuButton = styled.button`
+  font-size: 16px;
+  background: deepskyblue;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  height: 40px;
+  border: 0px;
+  &:hover {
+    color: darkslategrey;
+    background-color: skyblue;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    color: darkslategrey;
+    background-color: skyblue;
+  }
+`;
 class Navigation extends React.Component {
+  gotoTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  gotoEvents = () => {
+    window.scrollTo(0, this.props.depths.eventsDepth);
+  };
+  gotoMenucard = () => {
+    window.scrollTo(0, this.props.depths.menucardDepth);
+  };
+
+  gotoContact = () => {
+    window.scrollTo(0, this.props.depths.contactDepth);
+  };
   render() {
     return (
-      <MenuContainer>
-        <div className="mobileMenu">
-          <MenuBtn>
-            <div className="btn-line"></div>
-            <div className="btn-line"></div>
-            <div className="btn-line"></div>
-          </MenuBtn>
-        </div>
-        <TextMenu>
-          <ul>
-            <li>
-              <a href="#">Velkommen</a>
-            </li>
-            <li>
-              <a href="#">Arrangementer</a>
-            </li>
-            <li>
-              <a href="#">Menukort</a>
-            </li>
-            <li>
-              <a href="#">Galleri</a>
-            </li>
-            <li>
-              <a href="#">Kontakt/Booking</a>
-            </li>
-          </ul>
-        </TextMenu>
+      <Wrapper>
+        <Nav>
+          <MenuContainer>
+            <div className="mobileMenu">
+              <MobileMenuBtn>
+                <div className="btn-line"></div>
+                <div className="btn-line"></div>
+                <div className="btn-line"></div>
+              </MobileMenuBtn>
+            </div>
+            <TextMenu>
+              <ul>
+                <li>
+                  <MenuButton onClick={this.gotoTop}>Velkommen</MenuButton>
+                </li>
+                <li>
+                  <MenuButton onClick={this.gotoMenucard}>Menukort</MenuButton>
+                </li>
+                <li>
+                  <MenuButton onClick={this.gotoEvents}>
+                    Arrangementer
+                  </MenuButton>
+                </li>
+                <li>
+                  <MenuButton onClick={this.gotoContact}>
+                    Booking & Kontakt
+                  </MenuButton>
+                </li>
+              </ul>
+            </TextMenu>
 
-        <FbLogo></FbLogo>
-      </MenuContainer>
+            <FbLogo></FbLogo>
+          </MenuContainer>
+        </Nav>
+      </Wrapper>
     );
   }
 }

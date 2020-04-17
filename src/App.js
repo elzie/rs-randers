@@ -3,83 +3,79 @@ import './App.css';
 import styled from 'styled-components';
 import Navigation from './components/Navigation';
 
+import BannerImg1 from './img/rest_sejlklubben_banner1.jpg';
+
 // Page Imports
 import Home from './pages/Home';
 import Events from './pages/Events';
-import Menukort from './pages/Menukort';
-
-// Image imports
-import BannerImg1 from './img/rest_sejlklubben_banner1.jpg';
+import MenuKort from './pages/Menukort';
+import Contact from './pages/Contact';
 
 const Wrapper = styled.div`
   background: seashell;
-  height: 100%;
-  width: 100vw;
-  display: flex;
+`;
+const Nav = styled.div`
   justify-content: center;
-  @media (max-width: 360px) {
-    // width: 100vw;
-  }
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 `;
 const BannerImg = styled.div`
   background-image: url(${BannerImg1});
   background-position: center;
   height: 275px;
-  width: 100vw;
+
   @media (max-width: 360px) {
     height: 150px;
     background-size: cover;
     // width: 100%;
   }
 `;
-const Nav = styled.div`
-  background: deepskyblue;
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  & div {
-    width: 100%;
-    max-width: 900px;
-    height: 40px;
-  }
-  @media (max-width: 360px) {
-    display: block;
-  }
-`;
-const Contents = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-
-  @media (max-width: 360px) {
-    & div {
-      // width: 100%;
-    }
-  }
-`;
 class App extends React.Component {
+  state = {
+    homeDepth: 0,
+    eventsDepth: 0,
+    menucardDepth: 0,
+    contactDepth: 0,
+  };
+  componentDidMount() {
+    window.scrollTo(0, 947 - 40);
+    // Set back to 0,0 when done
+    // window.scrollTo(0, 0);
+  }
+
+  eventsRef = (ref) => {
+    console.log('eventsDepth', ref);
+    this.setState({
+      eventsDepth: ref - 40,
+    });
+  };
+
+  menuRef = (ref) => {
+    console.log('menuDepth', ref);
+    this.setState({
+      menucardDepth: ref - 40,
+    });
+  };
+
+  contactRef = (ref) => {
+    console.log('contactDepth', ref);
+    this.setState({
+      contactDepth: ref - 40,
+    });
+  };
+
   render() {
     return (
       <Wrapper>
-        <div>
-          <BannerImg></BannerImg>
-          <Nav>
-            <div>
-              <Navigation />
-            </div>
-          </Nav>
-          <Contents>
-            <div>
-              <Home />
-              <Events />
-              <Menukort />
-            </div>
-          </Contents>
-        </div>
+        <BannerImg></BannerImg>
+        <Nav>
+          <Navigation depths={this.state} refProp={this.eventsRef} />
+        </Nav>
+        <Home depths={this.state} refProp={this.eventsRef} />
+        <MenuKort refProp={this.menuRef} />
+        <Events refProp={this.eventsRef} />
+        <Contact refProp={this.contactRef} />
       </Wrapper>
     );
   }
