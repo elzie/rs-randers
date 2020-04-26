@@ -40,7 +40,7 @@ const RetContainer = styled.div`
 `;
 const Ret = styled.div`
   border-radius: 3px;
-  width: 340px !important;
+  width: 320px !important;
   //   float: left;
   display: block;
   //   min-height: 100px;
@@ -60,7 +60,9 @@ const Ret = styled.div`
   }
 `;
 const Indhold = styled.div``;
-const Pris = styled.div``;
+const Pris = styled.div`
+  font-weight: bold;
+`;
 
 class AftenMenu extends React.Component {
   state = {
@@ -79,7 +81,6 @@ class AftenMenu extends React.Component {
     this.getBornemenu();
     this.getDesserter();
   }
-
   getForretter = async () => {
     await aftenRef
       .collection('forretter')

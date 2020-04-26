@@ -40,7 +40,7 @@ const RetContainer = styled.div`
 `;
 const Ret = styled.div`
   border-radius: 3px;
-  width: 340px !important;
+  width: 320px !important;
   //   float: left;
   display: block;
   //   min-height: 100px;

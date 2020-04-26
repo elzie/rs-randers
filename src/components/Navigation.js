@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import SlideMenu from './SlideMenu';
 //Image imports
 import FacebookLogo from '../img/social/facebook.png';
 
@@ -19,7 +19,7 @@ const Nav = styled.div`
     max-width: 900px;
     height: 40px;
   }
-  @media (max-width: 360px) {
+  @media (max-width: 767px) {
     display: block;
   }
 `;
@@ -57,18 +57,18 @@ const MenuContainer = styled.div`
 
     // background: green;
   }
-  @media (max-width: 360px) {
+  @media (max-width: 767px) {
     display: block;
     & div.mobileMenu {
       display: block;
     }
     & ul {
-      display: none;
+      // display: none;
     }
   }
 `;
 const TextMenu = styled.div`
-  @media (max-width: 360px) {
+  @media (max-width: 767px) {
     display: none;
   }
 `;
@@ -83,7 +83,7 @@ const FbLogo = styled.div`
   cursor: pointer;
   margin: 0 10px 0 0;
 
-  @media (max-width: 360px) {
+  @media (max-width: 767px) {
     margin: 5px 5px 0 0;
   }
 `;
@@ -121,28 +121,26 @@ class Navigation extends React.Component {
   gotoTop = () => {
     window.scrollTo(0, 0);
   };
-
-  gotoEvents = () => {
-    window.scrollTo(0, this.props.depths.eventsDepth);
-  };
   gotoMenucard = () => {
-    window.scrollTo(0, this.props.depths.menucardDepth);
+    window.scrollTo(0, this.props.state.menucardDepth);
+  };
+  gotoEvents = () => {
+    window.scrollTo(0, this.props.state.eventsDepth);
+  };
+  gotoContact = () => {
+    window.scrollTo(0, this.props.state.contactDepth);
   };
 
-  gotoContact = () => {
-    window.scrollTo(0, this.props.depths.contactDepth);
-  };
   render() {
     return (
       <Wrapper>
         <Nav>
           <MenuContainer>
             <div className="mobileMenu">
-              <MobileMenuBtn>
-                <div className="btn-line"></div>
-                <div className="btn-line"></div>
-                <div className="btn-line"></div>
-              </MobileMenuBtn>
+              <SlideMenu
+                toggleMenu={this.props.toggleMobileMenu}
+                state={this.props.state}
+              />
             </div>
             <TextMenu>
               <ul>
@@ -153,9 +151,7 @@ class Navigation extends React.Component {
                   <MenuButton onClick={this.gotoMenucard}>Menukort</MenuButton>
                 </li>
                 <li>
-                  <MenuButton onClick={this.gotoEvents}>
-                    Arrangementer
-                  </MenuButton>
+                  <MenuButton onClick={this.gotoEvents}>Selskaber</MenuButton>
                 </li>
                 <li>
                   <MenuButton onClick={this.gotoContact}>

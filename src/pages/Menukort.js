@@ -6,53 +6,74 @@ import MenuComponent from '../components/MenuComponent';
 import MenuBackground from '../img/menucard.jpg';
 
 const Wrapper = styled.div`
-  min-height: calc(120vh - 40px);
+  min-height: 100vh;
+
   background-image: url(${MenuBackground});
   background-size: cover;
   background-position: center;
 `;
 const Content = styled.div`
   background: rgba(256, 256, 256, 0.5);
-  min-height: calc(120vh - 40px);
-  padding: 10px 0 0 0;
+  min-height: 100vh;
+
+  padding: 0 0 20px 0;
   & h1 {
-    margin: 15px 0 15px 0;
+    padding: 24px 0 0 0;
     color: #ffffff;
     font-size: 3em;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 0.8em;
     text-shadow: #000000 0 0 20px;
     text-align: center;
     width: 100%;
     font-family: 'Dancing Script', cursive;
-    // font-family: 'Euphoria Script', cursive;
   }
   & div {
     max-width: 900px;
     margin: auto;
   }
-  @media (max-width: 360px) {
+  @media (max-width: 767px) {
+    div {
+    }
     & h1 {
       font-size: 24px;
     }
   }
 `;
+const HeaderText = styled.h1`
+  // padding: 24px 0 0 0;
+  color: #ffffff;
+  font-size: 3em;
+  font-weight: 400;
+  line-height: 0.8em;
+  text-shadow: #000000 0 0 20px;
+  text-align: center;
+  width: 100%;
+  font-family: 'Dancing Script', cursive;
+  @media (max-width: 767px) {
+    font-size: 24px;
+    // padding: 30px 0 10px 0;
+  }
+`;
 class MenuKort extends React.Component {
   menuRef = React.createRef();
+  menuBottomRef = React.createRef();
   componentDidMount() {
     this.props.refProp(this.menuRef.current.offsetTop);
+    // this.props.eventsProp(this.menuBottomRef.current.offsetTop);
   }
   render() {
     return (
       <div ref={this.menuRef}>
         <Wrapper>
           <Content>
-            <h1>Restaurant Sejlklubben's Menukort</h1>
+            <HeaderText>Restaurant Sejlklubben's Menukort</HeaderText>
             <div>
-              <MenuComponent />
+              <MenuComponent refProp={this.props.refProp} />
             </div>
           </Content>
         </Wrapper>
+        <div ref={this.menuBottomRef}></div>
       </div>
     );
   }

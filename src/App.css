@@ -16,3 +16,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: darkgray;
 }
+
+.noScroll {
+  height: 100%;
+  overflow: hidden;
+}

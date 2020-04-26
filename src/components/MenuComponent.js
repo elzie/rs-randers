@@ -6,19 +6,6 @@ import AftenMenu from './AftenMenu';
 import DrinksMenu from './DrinksMenu';
 import DessertMenu from './DessertMenu';
 
-// const menus = {
-//   // You might wanna use firestore here :p
-//   frokost: {
-//     alacarte: {},
-//     smørrebrød: {},
-//     børnemenu: {},
-//     desserter: {},
-//   },
-//   aften: {},
-//   drinks: {},
-//   dessert: {},
-// };
-
 const Background = styled.div`
   background: rgba(256, 256, 256, 0.5);
   //   height: 80vh;
@@ -41,8 +28,8 @@ const Button = styled.button`
 const Menus = styled.div``;
 class MenuComponent extends React.Component {
   state = {
-    showFrokost: false,
-    showAften: true,
+    showFrokost: true,
+    showAften: false,
     showDrinks: false,
     showDessert: false,
   };
@@ -112,13 +99,13 @@ class MenuComponent extends React.Component {
             </Button>
             <Button
               ref={this.drinksRef}
-              id="drinks"
+              id="dessert"
               onClick={this.showChosenMenu}
             >
-              Kaffe & Drinks
+              Kaffe & Dessert
             </Button>
-            <Button id="dessert" onClick={this.showChosenMenu}>
-              Dessert menu
+            <Button id="drinks" onClick={this.showChosenMenu}>
+              Drinks & Avec
             </Button>
           </div>
           <Menus>

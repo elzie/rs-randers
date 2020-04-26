@@ -6,32 +6,34 @@ import styled from 'styled-components';
 import GreetingImage from '../img/gallery/7354.jpg';
 
 const Content = styled.div`
-  height: calc(100vh - 305px);
+  min-height: calc(100vh);
 
   background: seashell;
-  @media (max-width: 360px) {
-    height: calc(100vh - 190px);
+  & h2 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 400;
+    text-align: center;
+  }
+  @media (max-width: 767px) {
+    min-height: calc(100vh);
   }
 `;
 const Welcome = styled.div`
   margin: auto;
   max-width: 900px;
-  height: calc(100vh - 305px);
-  @media (max-width: 360px) {
-    width: 100vw;
+  min-height: calc(100vh - 305px);
+  display: flex;
+  padding: 0 20px 0 20px;
+  @media (max-width: 767px) {
+    // width: 100vw;
   }
 `;
 const WelcomeText = styled.div`
   max-width: 550px;
-  float: left;
-  & h2 {
-    font-family: 'Dancing Script', cursive;
-    font-weight: 400;
-  }
+  // float: left;
 
-  @media (max-width: 360px) {
+  @media (max-width: 767px) {
     max-width: 250px;
-    padding: 10px;
     font-size: 12px;
     & h2 {
       margin-top: 0px;
@@ -53,9 +55,9 @@ const WelcomeImage = styled.div`
   margin: 20px 0 0 20px;
   border: 2px solid deepskyblue;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   border-radius: 3px;
-  float: right;
+  // float: right;
   background-image: url(${GreetingImage});
   background-size: cover;
   background-position: center;
@@ -63,10 +65,9 @@ const WelcomeImage = styled.div`
     max-width: 300px;
     max-height: 400px;
   }
-  @media (max-width: 360px) {
-    margin: 80px 10px 0 0;
-    width: 70px;
-    height: 120px;
+  @media (max-width: 767px) {
+    margin: 10px 0 0 0;
+    width: 50%;
   }
 `;
 const Button = styled.button`
@@ -96,9 +97,10 @@ class Home extends React.Component {
     return (
       <div>
         <Content>
+          <h2>Velkommen til Restaurant Sejlklubben i Randers</h2>
           <Welcome>
             <WelcomeText>
-              <h2>Velkommen til Restaurant Sejlklubben i Randers</h2>
+              <p>OBS, DETTE ER ET DEMO SITE/APP</p>
               <p>
                 Restaurant Sejlklubben er en hyggelig restaurant, med lækker
                 udsigt og første parket til vandet med fantastisk udsigt fra
